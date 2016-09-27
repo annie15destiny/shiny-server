@@ -77,7 +77,7 @@ fluidPage(
                               selected="PENN PRESBYTERIAN MEDICAL CENTER",width=400),
                sliderInput("Operating_Margin", "Operating Margin (percentage)",
                            min=0, max=50, value=5, step=1),
-               selectInput("bed_refill", "New Patients Bed Occupancy/Loss of Admission", c("Default" = "Default", "Enter a Number" = "Enter_num"),selected = "Default"),
+               selectInput("bed_refill", "Bed Replacement", c("Default" = "Default", "Enter a Number" = "Enter_num"),selected = "Default"),
                conditionalPanel("input.bed_refill==='Enter_num'",numericInput("bed_refill_num", "Enter the Rate (percentage)",value = 0))#submitButton("Submit")
                
            )
@@ -118,10 +118,11 @@ fluidPage(
     column(width = 4,
            div(class = "option-group",
                div(class = "option-header", "Payment Related"),
-               selectInput("Payment_System", "Payment System",c("FFS System" = "FFS","Capitation System" = "Capitation","Revenue_Approach" = "Revenue Approach"),selected="FFS"),
-               sliderInput("Hosp_perc", "Hospital's proportion of TCM Expenses",min=0, max=1, value=1, step=0.01),
-               conditionalPanel("input.Payment_System=='FFS'",sliderInput("Penalty_Scale", "Penalty Scale",min=1, max=30, value=1, step=1),
-               sliderInput("Penalty_Limit_value", "Readmissions Adjustment Factor",min=0.9, max=1, value=0.97, step=0.01))
+               selectInput("Payment_System", "Payment System",c("FFS System" = "FFS","Capitation System" = "Capitation","Revenue Approach" = "Revenue_Approach"),selected="FFS"),
+               conditionalPanel("input.Payment_System=='FFS'",
+                                sliderInput("Penalty_Scale", "Penalty Scale",min=1, max=30, value=1, step=1),
+                                sliderInput("Hosp_perc", "Hospital's proportion of TCM Expenses",min=0, max=1, value=1, step=0.01),
+                                sliderInput("Penalty_Limit_value", "Readmissions Adjustment Factor",min=0.9, max=1, value=0.97, step=0.01))
                
            )
            
